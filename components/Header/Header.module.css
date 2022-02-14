@@ -1,0 +1,30 @@
+.logo {
+    margin: 10px 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #f5f3f3;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px 10px;
+    border-bottom: 2px solid #f5f3f3;
+}
+
+.header .menuLabel {
+    color: darkgrey;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+}
+
+.login span{
+    padding: 0 10px;
+}
+
+.login svg:last-child:hover{
+    color: orange;
+}
