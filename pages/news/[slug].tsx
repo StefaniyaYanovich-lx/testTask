@@ -1,4 +1,3 @@
-import {useRouter} from "next/router";
 import client from "../../lib/algoliaService";
 import {mapNewsItem} from "../../utils/utils";
 import {INewsDataResponse} from "../../types/types";

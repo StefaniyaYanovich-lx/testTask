@@ -17,7 +17,7 @@ export const FilterSearch = ({setFilteredNews, view, searchLabel}: {setFilteredN
     }
 
     const getFilteredNews = async () =>{
-        //remove data fetching to utils or use react query
+        //TODO: remove data fetching to utils or use react query
         const { hits } = await clientNews.initIndex('news').search("", {
             filters: `topics.title:${query}`,
         })
@@ -26,7 +26,7 @@ export const FilterSearch = ({setFilteredNews, view, searchLabel}: {setFilteredN
     }
 
 
-//styles to be adjusted
+//TODO: styles to be adjusted
     return (
         <div className={`${styles.filter_container} ${styles[view]}`}>
             {view === 'list' && <span>{searchLabel}</span>}

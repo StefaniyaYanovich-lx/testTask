@@ -22,7 +22,7 @@ const Home = ({headerData, newsData}: { headerData: IHeaderData; newsData: INews
 };
 
 export const getStaticProps = async () => {
-    //refactor (create const, move to utils)
+    //TODO: refactor (create const, move to utils)
     const { items } = await client.getEntries();
     const field =  (items[0].fields as IHeaderData);
     const { hits } = await clientNews.initIndex('news').search("", {

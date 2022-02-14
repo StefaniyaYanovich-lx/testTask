@@ -4,11 +4,11 @@ import {INewsData} from "../../types/types";
 import Link from 'next/link'
 
 export const NewsItem = ({item, isGalleryView} : {item: INewsData, isGalleryView: string}) =>{
-    //ref to use materialUi card component
+    //TODO:ref to use materialUi card component
         return (
             <article className={`${styles.card_container} ${styles[isGalleryView]}`} key={item.name}>
                 {/*using next js Image is preferable, but here there are too many domains*/}
-                <img className={`${styles.card_image} ${styles[isGalleryView]}`} src={item.imageUrl} alt="image"/>
+                <img loading="lazy" className={`${styles.card_image} ${styles[isGalleryView]}`} src={item.imageUrl} alt="image"/>
                 <div className={`${styles.card_info} ${styles[isGalleryView]}`}>
                 {item.topics.map((topic,index) => <span key={index} className={styles.sub_info}>{topic}</span>)}
                 <Link href={`news/${item.slug}`}>
