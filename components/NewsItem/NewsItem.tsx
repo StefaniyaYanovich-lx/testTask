@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 export const NewsItem = ({item, isGalleryView} : {item: INewsData, isGalleryView: string}) =>{
     //TODO:ref to use materialUi card component
+    console.log(item)
         return (
             <article className={`${styles.card_container} ${styles[isGalleryView]}`} key={item.name}>
                 {/*using next js Image is preferable, but here there are too many domains*/}
