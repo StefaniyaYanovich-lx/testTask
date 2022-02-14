@@ -44,7 +44,7 @@ export const getStaticProps = async () => {
             title: field.logo.fields?.title
         },
     }
-    const newsData = hits.map((i)=>mapNewsItem(i as INewsDataResponse));
+    const newsData = hits.map(mapNewsItem);
     return {
         props: {
             headerData,

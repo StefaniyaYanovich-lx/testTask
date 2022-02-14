@@ -1,37 +1,32 @@
 import styles from './MainGallery.module.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Switch} from "@material-ui/core";
 import {FormControlLabel} from "@mui/material";
 import {NewsItem} from "../NewsItem/NewsItem";
 import {INewsData} from "../../types/types";
+import {FilterSearch} from "../FilterSearch/FilterSearch";
+import {configCarousel} from "../../utils/utils";
 
 
 export const MainGallery = ({ newsData, title }  : {newsData: INewsData[]; title?: string;}) => {
     const [isGalleryView, setIsGalleryView] = useState(true);
+    const [view, setView] = useState('gallery');
+    const [news, setNews] = useState<INewsData[]>(newsData);
+    const [filteredNews, setFilteredNews] = useState<INewsData[]>([]);
 
     const handleChange = () => {
         setIsGalleryView(!isGalleryView);
     }
 
-    const responsive = {
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 3,
-            slidesToSlide: 3
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2,
-            slidesToSlide: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1,
-            slidesToSlide: 1
-        }
-    };
+    useEffect(()=>{
+        setView(isGalleryView? 'gallery' : 'list')
+    }, [isGalleryView])
+
+    useEffect(()=>{
+        if(filteredNews.length) setNews(filteredNews);
+    }, [filteredNews])
 
     return (
         <>
@@ -43,17 +38,18 @@ export const MainGallery = ({ newsData, title }  : {newsData: INewsData[]; title
                     color={"primary"}
                 />}
                  label="Gallery" />
-            <div className={`${styles.container_filter} ${isGalleryView? styles.gallery : styles.list}`}>
-                <div className={styles.container}>
+            <div className={`${styles.container_filter} ${styles[view]}`}>
+                <FilterSearch view={view} setFilteredNews={setFilteredNews}/>
+                <div className={`${styles.container} ${styles[view]}`}>
                     {isGalleryView ?
-                        <Carousel showDots={false} infinite={true} responsive={responsive}>
-                            {newsData.map(item=>
-                                <NewsItem item={item} isGalleryView={'gallery'}/>
+                        <Carousel showDots={false} infinite={true} responsive={configCarousel()}>
+                            {news.map(item=>
+                                <NewsItem key={item.slug} item={item} isGalleryView={'gallery'}/>
                             )}
                         </Carousel>
                         :
-                        newsData.map(item=>
-                                <NewsItem item={item} isGalleryView={'list'}/>
+                        news.map(item=>
+                                <NewsItem key={item.slug} item={item} isGalleryView={'list'}/>
                             )
                     }
                 </div>
