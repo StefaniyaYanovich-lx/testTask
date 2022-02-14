@@ -6,10 +6,10 @@ import styles from "../FilterSearch/FilterSearch.module.css";
 import React, {Dispatch, SetStateAction, useState} from "react";
 import clientNews from "../../lib/algoliaService";
 import {mapNewsItem} from "../../utils/utils";
-import {INewsData} from "../../types/types";
+import {INewsData, INewsDataResponse} from "../../types/types";
 
 
-export const FilterSearch = ({setFilteredNews, view, searchLabel}: {setFilteredNews: Dispatch<SetStateAction<INewsData[]>>; view: string, searchLabel:string;}) => {
+export const FilterSearch = ({setFilteredNews, view, searchLabel}: {setFilteredNews: Dispatch<SetStateAction<INewsData[]>>; view: string, searchLabel?:string;}) => {
     const [query, setQuery] = useState('');
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +21,7 @@ export const FilterSearch = ({setFilteredNews, view, searchLabel}: {setFilteredN
         const { hits } = await clientNews.initIndex('news').search("", {
             filters: `topics.title:${query}`,
         })
-        const mappedHits = hits.map(mapNewsItem)
+        const mappedHits = hits.map((i)=>mapNewsItem(i as INewsDataResponse))
         setFilteredNews(mappedHits)
     }
 
@@ -31,7 +31,7 @@ export const FilterSearch = ({setFilteredNews, view, searchLabel}: {setFilteredN
         <div className={`${styles.filter_container} ${styles[view]}`}>
             {view === 'list' && <span>{searchLabel}</span>}
             <TextField
-                label={Search}
+                label={"Search"}
                 onInput={handleInput}
                 value={query}
                 InputProps={{

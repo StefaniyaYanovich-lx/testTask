@@ -10,7 +10,7 @@ import {FilterSearch} from "../FilterSearch/FilterSearch";
 import {configCarousel} from "../../utils/utils";
 
 
-export const MainGallery = ({ newsData, title, searchLabel }  : {newsData: INewsData[]; title?: string; searchLabel: string;}) => {
+export const MainGallery = ({ newsData, title, searchLabel }  : {newsData: INewsData[]; title?: string; searchLabel?: string;}) => {
     const [isGalleryView, setIsGalleryView] = useState(true);
     const [view, setView] = useState('gallery');
     const [news, setNews] = useState<INewsData[]>(newsData);

@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 import client from "../lib/contentfulService";
 import clientNews from "../lib/algoliaService";
 import {Header} from "../components/Header/Header";
-import {IHeaderData, INewsData} from "../types/types";
+import {IHeaderData, INewsData, INewsDataResponse} from "../types/types";
 import {mapNewsItem} from "../utils/utils";
 import {MainGallery} from "../components/MainGallery/MainGallery";
 
@@ -45,7 +45,7 @@ export const getStaticProps = async () => {
             title: field.logo.fields?.title
         },
     }
-    const newsData = hits.map(mapNewsItem);
+    const newsData = hits.map((i)=>mapNewsItem(i as INewsDataResponse));
     return {
         props: {
             headerData,
