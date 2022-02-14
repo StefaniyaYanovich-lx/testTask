@@ -12,11 +12,11 @@ const NewsPage = ({hits} : { hits:INewsDataResponse }) => {
             <h2>{hits.name}</h2>
             <img className={`${styles.card_image} ${styles.gallery}`} src={hits.imageUrl} alt="image"/>
             <div className={`${styles.card_info}`}>
-                {hits.topics.map(topic => <span className={styles.sub_info}>{topic}</span>)}
+                {hits.topics.map(topic => <span key={topic.id} className={styles.sub_info}>{topic}</span>)}
                 <h4 className={styles.description}>{hits.description}</h4>
                 <div className={styles.card_footer}>
                     <time dateTime={hits.publicationDate}>{hits.publicationDate}</time>
-                    {hits.organization.map(org=> <span className={styles.sub_info}>{org}</span>)}
+                    {hits.organization.map(org=> <span key={org.fields.slug} className={styles.sub_info}>{org}</span>)}
                 </div>
             </div>
         </article>

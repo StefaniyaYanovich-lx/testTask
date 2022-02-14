@@ -10,7 +10,7 @@ export const NewsItem = ({item, isGalleryView} : {item: INewsData, isGalleryView
                 {/*using next js Image is preferable, but here there are too many domains*/}
                 <img className={`${styles.card_image} ${styles[isGalleryView]}`} src={item.imageUrl} alt="image"/>
                 <div className={`${styles.card_info} ${styles[isGalleryView]}`}>
-                {item.topics.map(topic => <span className={styles.sub_info}>{topic}</span>)}
+                {item.topics.map((topic,index) => <span key={index} className={styles.sub_info}>{topic}</span>)}
                 <Link href={`news/${item.slug}`}>
                     <a>
                         <h2>{item.name}</h2>
@@ -19,7 +19,7 @@ export const NewsItem = ({item, isGalleryView} : {item: INewsData, isGalleryView
                 {isGalleryView === 'list' && <h4 className={styles.description}>{item.description}</h4>}
                 <div className={styles.card_footer}>
                     <time dateTime={item.publicationDate}>{item.publicationDate}</time>
-                    {item.organization.map(org=> <span className={styles.sub_info}>{org}</span>)}
+                    {item.organization.map((org, index)=> <span key={index} className={styles.sub_info}>{org}</span>)}
                 </div>
                 </div>
             </article>
