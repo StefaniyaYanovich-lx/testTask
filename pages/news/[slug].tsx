@@ -7,7 +7,6 @@ import React from "react";
 
 
 const NewsPage = ({hits} : { hits:INewsDataResponse }) => {
-    const router = useRouter();
     return (
         <article className={`${styles.card_container} ${styles.news}`} key={hits.name}>
             <h2>{hits.name}</h2>

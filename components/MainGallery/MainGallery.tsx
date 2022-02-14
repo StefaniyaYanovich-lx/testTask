@@ -10,7 +10,7 @@ import {FilterSearch} from "../FilterSearch/FilterSearch";
 import {configCarousel} from "../../utils/utils";
 
 
-export const MainGallery = ({ newsData, title }  : {newsData: INewsData[]; title?: string;}) => {
+export const MainGallery = ({ newsData, title, searchLabel }  : {newsData: INewsData[]; title?: string; searchLabel: string;}) => {
     const [isGalleryView, setIsGalleryView] = useState(true);
     const [view, setView] = useState('gallery');
     const [news, setNews] = useState<INewsData[]>(newsData);
@@ -39,18 +39,21 @@ export const MainGallery = ({ newsData, title }  : {newsData: INewsData[]; title
                 />}
                  label="Gallery" />
             <div className={`${styles.container_filter} ${styles[view]}`}>
-                <FilterSearch view={view} setFilteredNews={setFilteredNews}/>
+                <FilterSearch view={view} setFilteredNews={setFilteredNews} searchLabel={searchLabel}/>
                 <div className={`${styles.container} ${styles[view]}`}>
                     {isGalleryView ?
-                        <Carousel showDots={false} infinite={true} responsive={configCarousel()}>
+                        <Carousel showDots={false} keyBoardControl={true} infinite={true} responsive={configCarousel()}>
                             {news.map(item=>
                                 <NewsItem key={item.slug} item={item} isGalleryView={'gallery'}/>
                             )}
                         </Carousel>
                         :
-                        news.map(item=>
+                        <div className={styles.list_results}
+                        ><p className={styles.list_results_header}>{`${news.length} Resources found`}</p>
+                            {news.map(item=>
                                 <NewsItem key={item.slug} item={item} isGalleryView={'list'}/>
-                            )
+                            )}
+                        </div>
                     }
                 </div>
             </div>

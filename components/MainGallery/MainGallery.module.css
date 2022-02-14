@@ -49,8 +49,8 @@ h4.description {
 }
 
 .card_image.list {
-    width: 350px;
-    height: 100%;
+    width: 300px;
+    height: 200px;
 }
 
 .card_image.gallery {
@@ -59,7 +59,7 @@ h4.description {
     object-fit: cover;
 }
 
-.card_info {
+.card_info.list {
     margin-left: 20px;
 }
 
@@ -92,5 +92,15 @@ h4.description {
 .container_filter.list{
     display: flex;
     flex-direction: row;
+    border-top: 2px solid #f3f3f3;
+    padding-top: 20px;
 }
 
+.list_results{
+    margin: 0 20px;
+}
+
+.list_results_header{
+    border-bottom: 2px solid #f3f3f3;
+    padding-bottom: 20px;
+}
